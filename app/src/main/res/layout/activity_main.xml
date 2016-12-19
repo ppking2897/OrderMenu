@@ -12,7 +12,7 @@
         android:layout_height="200dp"
         android:background="@drawable/sushibk"/>
 
-    <com.ogaclejapan.smarttablayout.SmartTabLayout 
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/viewpagertab"
         android:layout_width="match_parent"
         android:layout_height="48dp"

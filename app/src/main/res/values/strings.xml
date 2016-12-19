@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android_Pager</string>
+    <string name="titleA">A</string>
+    <string name="titleB">B</string>
+    <string name="titleC">C</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

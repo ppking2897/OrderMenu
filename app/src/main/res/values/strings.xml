@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Android_Pager</string>
-    <string name="titleA">A</string>
-    <string name="titleB">B</string>
-    <string name="titleC">C</string>
+    <string name="titleA">營業額概況</string>
+    <string name="titleB">餐點熱門率</string>
+    <string name="titleC">人數統計表</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

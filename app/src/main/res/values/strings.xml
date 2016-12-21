@@ -6,4 +6,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chart_title">(單位：千)</string>
+    <string name="chart_label_week1">第一週總額</string>
+    <string name="chart_label_week2">第二週總額</string>
+    <string name="chart_label_week3">第三週總額</string>
+    <string name="chart_label_week4">第四週總額</string>
 </resources>

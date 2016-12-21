@@ -9,9 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,15 +29,20 @@ import java.util.List;
 public class F1 extends Fragment {
     private TextView textViewF1;
     private UIHandler uiHandler;
+    private int DATA_COUNT = 5;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uiHandler = new UIHandler();
+//
+//        setContentView(R.layout.f1);
 
-
-
+//
 
     }
+
+
     private void parseJSON(String json){
         LinkedList accountInfo = new LinkedList<>();
         try{
@@ -80,6 +95,11 @@ public class F1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f1,container,false);
 
+       // 長方曲線圖表示
+      BarChart chart_bar = (BarChart)view.findViewById(R.id.chart_bar);
+        chart_bar.setData(getBarData());
+
+
         new Thread() {
             @Override
             public void run() {
@@ -104,5 +124,64 @@ public class F1 extends Fragment {
     }
 
 
+    //曲線圖的設定
 
-}
+    private BarData getBarData(){
+        BarDataSet dataSetA = new BarDataSet(getChartData(),
+                getString(R.string.chart_title));
+        //設定顏色
+        dataSetA.setColors(getChartColors());
+        //設定顯示字串
+        dataSetA.setStackLabels(getStackLabels());
+
+        List<BarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(dataSetA); // add the datasets
+
+        return new BarData(getLabels(), dataSets);
+    }
+
+    private String[] getStackLabels(){
+        return new String[]{getString(R.string.chart_label_week1),
+                getString(R.string.chart_label_week2),
+                getString(R.string.chart_label_week3),
+                getString(R.string.chart_label_week4)};
+    }
+
+    private int[] getChartColors() {
+        int[] colors = new int[]{getResourceColor(R.color.chart_color_Others),
+                getResourceColor(R.color.chart_color_KR),
+                getResourceColor(R.color.chart_color_JP)
+                ,getResourceColor(R.color.chart_color_US) };
+        return colors;
+    }
+    private int getResourceColor(int resID){
+        return getResources().getColor(resID);
+    }
+
+    // 每一個資料點就是一個Entry(y, x)，其中y的型態是float，x為int。
+    // 以下範產生出(0,0), (1,2), (2,4), (3,6), (4,8)五個點
+
+    private List<BarEntry> getChartData(){
+        final int DATA_COUNT = 5;
+
+        List<BarEntry> chartData = new ArrayList<>();
+        //每一個月都有四筆資料
+        for(int i=1;i<DATA_COUNT;i++){
+            float revenue_US = i*2;  //最上層
+            float revenue_JP = i*4;  //倒數三層
+            float revenue_KR = i*5;  //倒數二層
+            float revenue_Other = i*3; //最下層
+            chartData.add(new BarEntry(new float[]{revenue_Other, revenue_KR, revenue_JP, revenue_US}, i));
+        }
+        return chartData;
+    }
+
+    private List<String> getLabels(){
+        List<String> chartLabels = new ArrayList<>();
+        for(int i=0;i<DATA_COUNT;i++){
+            chartLabels.add((i+1)+"月");
+        }
+        return chartLabels;
+    }
+    }
+

@@ -29,11 +29,7 @@
         android:layout_height="match_parent"
         android:id="@+id/f1Text"
         />
-    <!--<com.github.mikephil.charting.charts.LineChart-->
-        <!--android:id="@+id/chart_line"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--/>-->
+
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart_bar"

@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.yalantis.phoenix.PullToRefreshView;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,15 +28,14 @@ public class F1 extends Fragment {
     private TextView textViewF1;
     private UIHandler uiHandler;
     private int DATA_COUNT = 5;
+    private PullToRefreshView mPullToRefreshView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uiHandler = new UIHandler();
 //
-//        setContentView(R.layout.f1);
 
-//
 
     }
 
@@ -95,6 +92,18 @@ public class F1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f1,container,false);
 
+        mPullToRefreshView = (PullToRefreshView)view.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                },1000);
+            }
+        });
        // 長方曲線圖表示
       BarChart chart_bar = (BarChart)view.findViewById(R.id.chart_bar);
         chart_bar.setData(getBarData());

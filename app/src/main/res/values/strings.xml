@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Android_Pager</string>
     <string name="titleA">營業額概況</string>
-    <string name="titleB">餐點熱門率</string>
+    <string name="titleB">餐點一覽</string>
     <string name="titleC">人數統計表</string>
 
     <!-- TODO: Remove or change this placeholder text -->

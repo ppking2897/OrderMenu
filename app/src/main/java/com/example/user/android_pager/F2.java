@@ -35,6 +35,7 @@ public class F2 extends Fragment {
     private CharSequence [] foodNameEN = {"porknoodle"};
     private String [] foodNameCH = {"肉絲炒麵" , "牛肉炒麵" , "機肉炒麵" , "豬肉炒飯" , "牛肉炒飯 "
             , "雞肉炒飯" , "蛤仔湯" , "隔間肉湯" , "豬肝湯" };
+    
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

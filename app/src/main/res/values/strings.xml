@@ -14,5 +14,12 @@
     <string name="chart_label_week4">第四週總計</string>
     <!--FoodName-->
     <string name="porknoodle">肉絲炒麵</string>
-
+    <string name="beefnoodle">牛肉炒麵</string>
+    <string name="chickennoodle">雞肉炒麵</string>
+    <string name="porkrice">肉絲炒飯</string>
+    <string name="beefrice">牛肉炒飯</string>
+    <string name="chickenrice">雞肉炒飯</string>
+    <string name="clamsoup">蛤仔湯</string>
+    <string name="broth">隔間肉湯</string>
+    <string name="liversoup">豬肝湯</string>
 </resources>

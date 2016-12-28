@@ -2,10 +2,13 @@ package com.example.user.android_pager;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.ArrayMap;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yalantis.phoenix.PullToRefreshView;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,14 +47,18 @@ public class F2 extends Fragment {
     private String [] foodNameCH = {"肉絲炒麵" , "牛肉炒麵" , "機肉炒麵" , "豬肉炒飯" , "牛肉炒飯 "
             , "雞肉炒飯" , "蛤仔湯" , "隔間肉湯" , "豬肝湯" };
 
-    private MyAdapter myAdapter;
-    private GridView gridView;
+    private RecyclerView recyclerView;
+    private Adapter adapter;
+    int img [] = {R.drawable.b0,R.drawable.b1,R.drawable.b0,R.drawable.b0
+            ,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uiHandler = new UIHandler();
         hashMap = new HashMap();
+
+
 
     }
 
@@ -105,7 +113,7 @@ public class F2 extends Fragment {
 
                         hashMap.put(msg.getData().getCharSequence("menu"+i),foodNameCH[i]);
 //                        Log.v("ppking" , "hashMap" + hashMap.toString() );
-                       textViewF2.append("textViewF2:" + hashMap.get(foodNameEN[0])+"\n");
+//                       textViewF2.append("textViewF2:" + hashMap.get(foodNameEN[0])+"\n");
 
                     }
                     break;
@@ -161,63 +169,15 @@ public class F2 extends Fragment {
                 }
             }
         }.start();
-        textViewF2 = (TextView)view.findViewById(R.id.f2Text);
-        textViewF21 = (TextView)view.findViewById(R.id.f2Text02);
 
-
+        //----------------RecyclerView------------------
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView.setAdapter(adapter = new Adapter(getContext(),img ,foodNameCH));
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        //------------------END-------------------------
         return view;
-    }
-
-    private class MyAdapter extends BaseAdapter{
-        private Context context;
-        MyAdapter(Context context){
-            this.context = context;
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-            ImageView imageView;
-            if(view ==null){
-                imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(185, 185));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            }else{
-                imageView=(ImageView)view;
-            }
-            imageView.setImageResource(R.drawable.food01);
-
-//            view = LayoutInflater.from(context).inflate(R.layout.layout,null);
-//            TextView layoutText = (TextView)view.findViewById(R.id.layoutMenu);
-//            TextView layoutTitle = (TextView)view.findViewById(R.id.layoutTitle);
-//            layoutTitle.setText("料理名稱:");
-//
-//
-//            layoutText.append(hashMap.get(foodNameEN[0]) + "\n");
-//            layoutText.append("ppking");
-            return view;
-        }
-    }
-
-    private void inigridView(){
-        myAdapter = new MyAdapter(getContext());
-        gridView = (GridView) getView().findViewById(R.id.gridview);
-        gridView.setAdapter(myAdapter);
     }
 
 }

@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -44,22 +45,31 @@ public class F2 extends Fragment {
     private HashMap hashMap;
     private CharSequence [] foodNameEN = {"porknoodle" , "beefnoodle" , "chickennoodle" , "porkrice"
                                          ,"beefrice" , "chickennoodle" , "clamsoup" , "broth" , "liversoup"};
-    private String [] foodNameCH = {"肉絲炒麵" , "牛肉炒麵" , "機肉炒麵" , "豬肉炒飯" , "牛肉炒飯 "
+    private String [] foodNameCH = {"肉絲炒麵" , "牛肉炒麵" , "雞肉炒麵" , "豬肉炒飯" , "牛肉炒飯 "
             , "雞肉炒飯" , "蛤仔湯" , "隔間肉湯" , "豬肝湯" };
+
+    private ArrayList<String> foodArray = new ArrayList<>();
 
     private RecyclerView recyclerView;
     private Adapter adapter;
     int img [] = {R.drawable.b0,R.drawable.b1,R.drawable.b0,R.drawable.b0
             ,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0};
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uiHandler = new UIHandler();
         hashMap = new HashMap();
-
-
-
+        foodArray.add(foodNameCH[0]);
+        foodArray.add(foodNameCH[1]);
+        foodArray.add(foodNameCH[2]);
+        foodArray.add(foodNameCH[3]);
+        foodArray.add(foodNameCH[4]);
+        foodArray.add(foodNameCH[5]);
+        foodArray.add(foodNameCH[6]);
+        foodArray.add(foodNameCH[7]);
+        foodArray.add(foodNameCH[8]);
     }
 
     private void parseJSON(String json){
@@ -133,10 +143,10 @@ public class F2 extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.f2,container,false);
+        View view = inflater.inflate(R.layout.f2, container, false);
 
         //下拉式更新
-        mPullToRefreshView = (PullToRefreshView)view.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -145,7 +155,7 @@ public class F2 extends Fragment {
                     public void run() {
                         mPullToRefreshView.setRefreshing(false);
                     }
-                },1000);
+                }, 1000);
             }
         });
 
@@ -164,20 +174,21 @@ public class F2 extends Fragment {
                     reader.close();
 
                     parseJSON(line);
-                }catch(Exception e){
+                } catch (Exception e) {
                     Log.v("brad", e.toString());
                 }
             }
         }.start();
 
         //----------------RecyclerView------------------
+
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
-        recyclerView.setAdapter(adapter = new Adapter(getContext(),img ,foodNameCH));
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        recyclerView.setAdapter(adapter = new Adapter(getContext(), img, foodArray));
+//        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+//        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         //------------------END-------------------------
         return view;
     }
-
 }

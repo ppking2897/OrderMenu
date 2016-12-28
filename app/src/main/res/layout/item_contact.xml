@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="200sp">
-    <ImageView
-        android:id="@+id/itemImg"
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+    android:layout_margin="4sp">
+    <RelativeLayout
+        android:paddingTop="20sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-    <TextView
-        android:id="@+id/itemText"
-        android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SSS"
-        />
-</RelativeLayout>
+        >
+        <ImageView
+            android:id="@+id/itemImg"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:src="@drawable/b0"
+            />
+        <TextView
+            android:id="@+id/itemText"
+            android:layout_below="@id/itemImg"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SSS"
+            />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

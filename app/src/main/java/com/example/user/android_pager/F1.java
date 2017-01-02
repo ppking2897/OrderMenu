@@ -109,27 +109,6 @@ public class F1 extends Fragment {
       BarChart chart_bar = (BarChart)view.findViewById(R.id.chart_bar);
         chart_bar.setData(getBarData());
 
-
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    //?後面為POST過去要查詢的資料名稱
-                    MultipartUtility mu = new MultipartUtility("https://android-test-db-ppking2897.c9users.io/DataBase/AccountQuery02.php?accountId=ppking0802", "UTF-8");
-                    List<String> ret = mu.finish();
-
-                    parseJSON(ret.toString());
-                    Log.v("ppking", ret.toString());
-
-
-
-                } catch (Exception e) {
-                    Log.v("ppking", "DB Error:" + e.toString());
-                }
-            }
-        }.start();
-        textViewF1 = (TextView)view.findViewById(R.id.f1Text);
-
         return view;
     }
 

@@ -1,142 +1,47 @@
 package com.example.user.android_pager;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.yalantis.phoenix.PullToRefreshView;
 
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class F2 extends Fragment {
     private PullToRefreshView mPullToRefreshView;
-    private TextView textViewF2,textViewF21;
-    private UIHandler uiHandler;
-    private HashMap hashMap;
-    private CharSequence [] foodNameEN = {"porknoodle" , "beefnoodle" , "chickennoodle" , "porkrice"
-                                         ,"beefrice" , "chickennoodle" , "clamsoup" , "broth" , "liversoup"};
-    private String [] foodNameCH = {"肉絲炒麵" , "牛肉炒麵" , "雞肉炒麵" , "豬肉炒飯" , "牛肉炒飯 "
-            , "雞肉炒飯" , "蛤仔湯" , "隔間肉湯" , "豬肝湯" };
-
-    private ArrayList<String> foodArray = new ArrayList<>();
-
     private RecyclerView recyclerView;
     private Adapter adapter;
-    int img [] = {R.drawable.b0,R.drawable.b1,R.drawable.b0,R.drawable.b0
-            ,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0,R.drawable.b0};
-
+    private FireBase fireBase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uiHandler = new UIHandler();
-        hashMap = new HashMap();
-        foodArray.add(foodNameCH[0]);
-        foodArray.add(foodNameCH[1]);
-        foodArray.add(foodNameCH[2]);
-        foodArray.add(foodNameCH[3]);
-        foodArray.add(foodNameCH[4]);
-        foodArray.add(foodNameCH[5]);
-        foodArray.add(foodNameCH[6]);
-        foodArray.add(foodNameCH[7]);
-        foodArray.add(foodNameCH[8]);
+        fireBase = new FireBase();
     }
 
-    private void parseJSON(String json){
-        Message mesg = new Message();
-        Message mesg2 = new Message();
-        Bundle data = new Bundle();
-        Bundle data2 = new Bundle();
-        LinkedList menuInfo = new LinkedList<>();
-        LinkedList priceInfo = new LinkedList<>();
-        try{
 
-            JSONArray jsonArray = new JSONArray(json);
-            for(int i = 0 ; i < jsonArray.length(); i++) {
-                JSONArray jsonArray1 = jsonArray.getJSONArray(i);
-                JSONObject obj = jsonArray1.getJSONObject(0);
-                String stringNo1 = obj.getString("FoodName");
-                menuInfo.add(stringNo1);
-                data.putCharSequence("menu"+i,menuInfo.get(i).toString());
-
-
-                jsonArray1 = jsonArray.getJSONArray(i);
-                obj = jsonArray1.getJSONObject(1);
-                String stringNo2 = obj.getString("Price");
-                priceInfo.add(stringNo2);
-                data2.putCharSequence("price"+i,priceInfo.get(i).toString());
-
-            }
-
-            mesg.setData(data);
-            mesg.what=0;
-            uiHandler.sendMessage(mesg);
-
-            mesg2.setData(data2);
-            mesg2.what=1;
-            uiHandler.sendMessage(mesg2);
+    //-----定義一個回傳list的方法  並定義在別處定義一個App的型別類別
+//    private List<App> getApps(){
+//        List<App> apps = new ArrayList<>();
+//        apps.add(new App("豚骨拉麵","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15781843_1462626693747912_723476130_n.png?alt=media&token=dc0eba5f-c9db-4828-8a47-c17ea67cf43f"));
+//        apps.add(new App("醬油拉麵","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15731701_1462626697081245_596702805_n.png?alt=media&token=6cb992a7-f8ed-45e9-ab00-9aff281bc7af"));
+//        apps.add(new App("味噌拉麵","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15731240_1462626700414578_395190317_n.png?alt=media&token=68d0c4ca-bc69-4476-a9c0-7934b9c35a19"));
+//        apps.add(new App("豬排定食","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15731097_1462626633747918_1420253165_n.jpg?alt=media&token=d2a88e8d-91a3-40a4-9290-37f241997e2e"));
+//        apps.add(new App("牛小排定食","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15731174_1462626640414584_479793837_n.jpg?alt=media&token=bb2c8ad4-8e3f-4811-b37a-d6564a7a46c1"));
+//        apps.add(new App("秋刀魚定食","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15731581_1462626637081251_455999719_n.jpg?alt=media&token=b9da6a0a-ba2c-44c0-bcb6-38bbf9faa940"));
+//        apps.add(new App("玉米濃湯","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15723933_1462626587081256_1565692789_n.png?alt=media&token=5f0e8f15-2575-4a3d-bfa0-e09e27435c6a"));
+//        apps.add(new App("番茄濃湯","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15749560_1462626593747922_476309376_n.png?alt=media&token=584bd9f6-8ab6-41a3-8601-8c58d98b81f5"));
+//        apps.add(new App("南瓜濃湯","https://firebasestorage.googleapis.com/v0/b/menumaneger.appspot.com/o/15750291_1462626597081255_486750815_n.png?alt=media&token=3c4dcc88-185a-4736-b129-5204c0e1f39f"));
+//        return apps;
+//    }
 
 
-        }catch (Exception e){
-            Log.v("ppking", "ErrorF2 : " + e.toString());
-        }
-    }
-
-    private class UIHandler extends android.os.Handler{
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0 :
-                    for (int i = 0 ; msg.getData().getCharSequence("menu"+i)!=null ; i++ ) {
-
-
-                        hashMap.put(msg.getData().getCharSequence("menu"+i),foodNameCH[i]);
-//                        Log.v("ppking" , "hashMap" + hashMap.toString() );
-//                       textViewF2.append("textViewF2:" + hashMap.get(foodNameEN[0])+"\n");
-
-                    }
-                    break;
-                case 1 :
-                    for (int i = 0 ; msg.getData().getCharSequence("price"+i)!=null ; i++ ) {
-
-//                        textViewF21.append("textViewF21 : "+msg.getData().getCharSequence("price"+i)+"\n");
-//                        Log.v("ppking" , "textViewF21");
-                    }
-                    break;
-            }
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,42 +58,41 @@ public class F2 extends Fragment {
                 mPullToRefreshView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        adapter.notifyDataSetChanged();
                         mPullToRefreshView.setRefreshing(false);
                     }
                 }, 1000);
             }
         });
 
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://android-test-db-ppking2897.c9users.io/DataBase/MenuQuery02.php");
-                    HttpURLConnection conn =
-                            (HttpURLConnection) url.openConnection();
-                    conn.connect();
-                    BufferedReader reader =
-                            new BufferedReader(
-                                    new InputStreamReader(conn.getInputStream()));
-                    String line = reader.readLine();
-                    reader.close();
 
-                    parseJSON(line);
-                } catch (Exception e) {
-                    Log.v("brad", e.toString());
-                }
-            }
-        }.start();
 
         //----------------RecyclerView------------------
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        recyclerView.setAdapter(adapter = new Adapter(getContext(), img, foodArray));
-//        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-//        recyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+        //----------------------------------------------
+        //------將資料丟入調變器內去分配-------
+
+        //fireBase.ReadBase("menu");
+        fireBase.ReadFoodBase("menuinfo");
+
+        //List<App> apps = getApps();
+        adapter = new Adapter(getContext(),fireBase.path , fireBase.food , fireBase.price);
+
+
+        recyclerView.setAdapter(adapter);
+        //----------------------------------------
+        //---------右上角ADD功能
+        view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                ShowDialog showDialog =new ShowDialog();
+                showDialog.showDialog(getContext());
+
+            }
+        });
         //------------------END-------------------------
         return view;
     }
+
+
 }

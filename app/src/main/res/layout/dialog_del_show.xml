@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/del_NameTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp"
+            android:paddingLeft="15sp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:text="料理名稱 :"
+            />
+
+        <TextView
+            android:id="@+id/del_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10sp"
+            android:textSize="18sp"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp"
+            android:paddingLeft="15sp"
+            android:layout_marginLeft="35sp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:text="價格 :"
+            />
+
+        <TextView
+            android:id="@+id/del_Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
+            android:layout_marginRight="60sp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="222"
+            />
+    </LinearLayout>
+</LinearLayout>

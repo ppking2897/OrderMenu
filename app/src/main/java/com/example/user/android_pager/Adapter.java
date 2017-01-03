@@ -1,6 +1,7 @@
 package com.example.user.android_pager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -28,7 +30,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
     private List<String> foodName;
     private List<String> price;
     private List<String> path;
-    int count ;
+    private final View.OnClickListener onClickListener  = new MyOnClickListener();
+    private RecyclerView recyclerView;
+
 
 
     public Adapter(Context context ,List<String> path , List<String> foodName ,List<String> price )  {
@@ -38,12 +42,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
         this.path = path;
         myhandler = new Myhandler();
         startUpdateTimer();
+
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false));
         view = LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false);
+        view.setOnClickListener(onClickListener);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -115,4 +121,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
         }
     }
     //--------------------------------------------------------
-}
+
+    public class MyOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+
+//                recyclerView = new RecyclerView(context);
+//                int itemPosition = recyclerView.getChildAdapterPosition(view);
+//                String foodItem = foodName.get(itemPosition);
+//                String pathItem = path.get(itemPosition);
+//                String priceItem = price.get(itemPosition);
+//
+//                ShowDialog showDialog = new ShowDialog();
+//                showDialog.showDelItem(context, foodItem, pathItem, priceItem);
+
+            }
+            //Toast.makeText(context,item,Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+

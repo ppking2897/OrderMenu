@@ -1,5 +1,6 @@
 package com.example.user.android_pager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.yalantis.phoenix.PullToRefreshView;
 
 
@@ -18,6 +21,7 @@ public class F2 extends Fragment {
     private RecyclerView recyclerView;
     private Adapter adapter;
     private FireBase fireBase;
+    public boolean isDelete;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,13 +90,19 @@ public class F2 extends Fragment {
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 ShowDialog showDialog =new ShowDialog();
-                showDialog.showDialog(getContext());
+                showDialog.showAddDialog(getContext());
 
+            }
+        });
+        view.findViewById(R.id.del).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"請選擇要刪除的項目",Toast.LENGTH_SHORT).show();
+                isDelete =true;
             }
         });
         //------------------END-------------------------
         return view;
     }
-
 
 }

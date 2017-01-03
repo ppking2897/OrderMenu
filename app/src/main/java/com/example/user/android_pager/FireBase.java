@@ -24,17 +24,19 @@ public class FireBase {
 //    FirebaseDatabase databasePath = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseTest = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseWrite = FirebaseDatabase.getInstance();
+    private FirebaseDatabase databaseDelete = FirebaseDatabase.getInstance();
 
 //    DatabaseReference myRefFood;
 //    DatabaseReference myRefPrice;
 //    DatabaseReference myRefPath;
     private DatabaseReference myRefTest;
     private DatabaseReference myRefWrite;
+    private DatabaseReference myRefDelete;
 
     List<String> food =new ArrayList<>();
     List<String> price = new ArrayList<>();
     List<String> path = new ArrayList<>();
-    List<String> key ;
+    static List<String> key ;
 
     Map<String,Object> child01;
     Map<String,Object> child02;
@@ -143,6 +145,7 @@ public class FireBase {
                 }
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     key.add(child.getKey());
+                    Log.v("ppking" , "key" +key);
                 }
                 for (int i = 0; i < key.size(); i++) {
                     food.add(dataSnapshot.child(key.get(i)).child("name").getValue().toString());
@@ -170,34 +173,31 @@ public class FireBase {
 
         myRefWrite.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!isupdate) {
-                    count = dataSnapshot.getChildrenCount();
-                    child02.put("name", DBName);
-                    child02.put("path", DBPath);
-                    child02.put("price", DBPrice);
-                    child01.put("foodname"+count , child02);
-                    Log.v("ppking" , "count" + count);
-                    myRefWrite.updateChildren(child01);
-                    isupdate = true;
+                    if(!isupdate) {
+                        int i = Integer.parseInt(key.get(key.size()-1));
+                        count = dataSnapshot.getChildrenCount();
+                        child02.put("name", DBName);
+                        child02.put("path", DBPath);
+                        child02.put("price", DBPrice);
+                        child01.put(""+(i+1) , child02);
+                        Log.v("ppking" ,"key.size"+key.get(key.size()-1 ));
+                        myRefWrite.updateChildren(child01);
+                        isupdate = true;
+                    }
                 }
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
-//        child02.put("name", DBName);
-//        child02.put("path", DBPath);
-//        child02.put("price", DBPrice);
-//        child01.put("foodname0" + key.size() + 1, child02);
-//        myRefWrite.updateChildren(child01);
-
-
     }
-
+    public void DeleteData(int itemPosition){
+        myRefDelete = databaseDelete.getReference("menuinfo");
+        Log.v("ppking" , "Delete"+myRefDelete.child(""+itemPosition));
+        Log.v("ppking", "delete key" + key.get(itemPosition));
+        myRefDelete.child(key.get(itemPosition)).removeValue();
+    }
 }

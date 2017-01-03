@@ -21,7 +21,7 @@ public class F2 extends Fragment {
     private RecyclerView recyclerView;
     private Adapter adapter;
     private FireBase fireBase;
-    public boolean isDelete;
+    public static boolean isDelete;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +99,7 @@ public class F2 extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getContext(),"請選擇要刪除的項目",Toast.LENGTH_SHORT).show();
                 isDelete =true;
+                //Log.v("ppking" , "F2_isdelete : " + isDelete);
             }
         });
         //------------------END-------------------------

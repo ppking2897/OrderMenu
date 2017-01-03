@@ -32,6 +32,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
     private List<String> path;
     private final View.OnClickListener onClickListener  = new MyOnClickListener();
     private RecyclerView recyclerView;
+    private int itemPosition;
+
+    private FireBase fireBase;
 
 
 
@@ -41,6 +44,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
         this.price = price;
         this.path = path;
         myhandler = new Myhandler();
+        fireBase = new FireBase();
         startUpdateTimer();
 
     }
@@ -60,7 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
         if(!foodName.isEmpty()&&!price.isEmpty()&&!path.isEmpty()) {
             Picasso.with(context).load(path.get(position)).resize(300, 300).into(holder.img);
             holder.textView.setText("名稱 : " + foodName.get(position));
-            holder.textPrice.setText("價格 : " + price.get(position));
+            holder.textPrice.setText("價格 : " + price.get(position) + "元");
         }
 
     }
@@ -122,23 +126,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>implement
     }
     //--------------------------------------------------------
 
-    public class MyOnClickListener implements View.OnClickListener{
+    public class MyOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
-//                recyclerView = new RecyclerView(context);
-//                int itemPosition = recyclerView.getChildAdapterPosition(view);
-//                String foodItem = foodName.get(itemPosition);
-//                String pathItem = path.get(itemPosition);
-//                String priceItem = price.get(itemPosition);
-//
-//                ShowDialog showDialog = new ShowDialog();
-//                showDialog.showDelItem(context, foodItem, pathItem, priceItem);
-
+            if (F2.isDelete) {
+                recyclerView = new RecyclerView(context);
+                itemPosition = recyclerView.getChildAdapterPosition(view);
+                String foodItem = foodName.get(itemPosition);
+                String pathItem = path.get(itemPosition);
+                String priceItem = price.get(itemPosition);
+                //Log.v("ppking" , "itemPosition" + itemPosition);
+                ShowDialog showDialog = new ShowDialog();
+                showDialog.showDelItem(context, foodItem, pathItem, priceItem);
+                F2.isDelete = false;
+                fireBase.DeleteData(itemPosition);
             }
             //Toast.makeText(context,item,Toast.LENGTH_LONG).show();
         }
 
-
     }
+}
 

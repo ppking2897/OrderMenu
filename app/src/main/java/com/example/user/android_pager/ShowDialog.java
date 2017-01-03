@@ -59,7 +59,7 @@ public class ShowDialog {
 
         textFood.setText(name);
         //textPath.setText(path);
-        textPrice.setText(price);
+        textPrice.setText(price + "元");
 
 
         builder.setView(view);

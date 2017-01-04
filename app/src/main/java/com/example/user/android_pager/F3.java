@@ -26,64 +26,16 @@ import java.util.List;
 
 public class F3 extends Fragment {
     private TextView textViewF1;
-    private UIHandler uiHandler;
     private int DATA_COUNT = 5;
     private PullToRefreshView mPullToRefreshView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uiHandler = new UIHandler();
 //
 
 
     }
-
-
-    private void parseJSON(String json){
-        LinkedList accountInfo = new LinkedList<>();
-        try{
-
-            JSONObject jsonObject = new JSONArray(json).getJSONObject(0);
-
-            String stringNo1 = jsonObject.getString("Account");
-            accountInfo.add(stringNo1);
-            String stringNo2 = jsonObject.getString("SeatIdNumber");
-            accountInfo.add(stringNo2);
-            String stringNo3 = jsonObject.getString("Checkout");
-            accountInfo.add(stringNo3);
-
-
-
-            Message mesg = new Message();
-            Bundle data = new Bundle();
-            data.putCharSequence("data0",accountInfo.get(0).toString());
-            data.putCharSequence("data1",accountInfo.get(1).toString());
-            data.putCharSequence("data2",accountInfo.get(2).toString());
-            mesg.setData(data);
-            mesg.what=0;
-            uiHandler.sendMessage(mesg);
-
-
-        }catch (Exception e){
-            Log.v("ppking", "Error : " + e.toString());
-        }
-    }
-
-    private class UIHandler extends android.os.Handler{
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0 :
-                    textViewF1.setText("Accound : "+msg.getData().getCharSequence("data0")+"\n");
-                    textViewF1.append("SeatIdNumber : "+msg.getData().getCharSequence("data1")+"\n");
-                    textViewF1.append("Checkout : $"+msg.getData().getCharSequence("data2")+"\n");
-                    break;
-            }
-        }
-    }
-
 
 
     @Override

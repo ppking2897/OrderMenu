@@ -25,65 +25,14 @@ import java.util.List;
 
 
 public class F1 extends Fragment {
-    private TextView textViewF1;
-    private UIHandler uiHandler;
-    private int DATA_COUNT = 5;
+    private int DATA_COUNT = 12;
     private PullToRefreshView mPullToRefreshView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uiHandler = new UIHandler();
-//
-
 
     }
-
-
-    private void parseJSON(String json){
-        LinkedList accountInfo = new LinkedList<>();
-        try{
-
-            JSONObject jsonObject = new JSONArray(json).getJSONObject(0);
-
-            String stringNo1 = jsonObject.getString("Account");
-            accountInfo.add(stringNo1);
-            String stringNo2 = jsonObject.getString("SeatIdNumber");
-            accountInfo.add(stringNo2);
-            String stringNo3 = jsonObject.getString("Checkout");
-            accountInfo.add(stringNo3);
-
-
-
-            Message mesg = new Message();
-            Bundle data = new Bundle();
-            data.putCharSequence("data0",accountInfo.get(0).toString());
-            data.putCharSequence("data1",accountInfo.get(1).toString());
-            data.putCharSequence("data2",accountInfo.get(2).toString());
-            mesg.setData(data);
-            mesg.what=0;
-            uiHandler.sendMessage(mesg);
-
-
-        }catch (Exception e){
-            Log.v("ppking", "Error : " + e.toString());
-        }
-    }
-
-    private class UIHandler extends android.os.Handler{
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 0 :
-                    textViewF1.setText("Accound : "+msg.getData().getCharSequence("data0")+"\n");
-                    textViewF1.append("SeatIdNumber : "+msg.getData().getCharSequence("data1")+"\n");
-                    textViewF1.append("Checkout : $"+msg.getData().getCharSequence("data2")+"\n");
-                    break;
-            }
-        }
-    }
-
 
 
     @Override
@@ -116,8 +65,7 @@ public class F1 extends Fragment {
     //曲線圖的設定
 
     private BarData getBarData(){
-        BarDataSet dataSetA = new BarDataSet(getChartData(),
-                getString(R.string.chart_title));
+        BarDataSet dataSetA = new BarDataSet(getChartData(), getString(R.string.chart_title));
         //設定顏色
         dataSetA.setColors(getChartColors());
         //設定顯示字串
@@ -151,7 +99,7 @@ public class F1 extends Fragment {
     // 以下範產生出(0,0), (1,2), (2,4), (3,6), (4,8)五個點
 
     private List<BarEntry> getChartData(){
-        final int DATA_COUNT = 6;
+        final int DATA_COUNT = 3;
 
         List<BarEntry> chartData = new ArrayList<>();
         //每一個月都有四筆資料
@@ -168,7 +116,7 @@ public class F1 extends Fragment {
 
     private List<String> getLabels(){
         List<String> chartLabels = new ArrayList<>();
-        for(int i=0;i<DATA_COUNT;i++){
+        for(int i=0;i<=DATA_COUNT;i++){
             chartLabels.add((i+1)+"月");
         }
         return chartLabels;

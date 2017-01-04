@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(MainActivity.this)
                 .add(R.string.titleA, F1.class)
-                .add(R.string.titleB, F2.class)
                 .add(R.string.titleC, F3.class)
+                .add(R.string.titleB, F2.class)
                 .create());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);

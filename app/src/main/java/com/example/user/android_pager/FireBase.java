@@ -279,13 +279,10 @@ public class FireBase {
     public void DeleteData(int itemPosition ,String type){
         myRefDelete = databaseDelete.getReference("foodinfo/"+type);
         if(type == "noodle") {
-            Log.v("ppking", "Delete" + myRefDelete.child(keyNoodle.get(itemPosition)));
             myRefDelete.child(keyNoodle.get(itemPosition)).removeValue();
         }else if(type == "rice"){
-            Log.v("ppking", "Delete" + myRefDelete.child(keyRice.get(itemPosition)));
             myRefDelete.child(keyRice.get(itemPosition)).removeValue();
         }else if(type == "soup"){
-            Log.v("ppking", "Delete" + myRefDelete.child(keySoup.get(itemPosition)));
             myRefDelete.child(keySoup.get(itemPosition)).removeValue();
         }
         //myRefDelete.child(key.get(itemPosition)).removeValue();

@@ -24,9 +24,8 @@ import static com.example.user.android_pager.Adapter.typeDelPosition;
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
     private Context context;
-    private List<App> apps  ;
-    private View view, view2;
-    private Myhandler myhandler;
+    private View view;
+
     private List<String> foodName;
     private List<String> price;
     private List<String> path;
@@ -34,7 +33,6 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
     private RecyclerView recyclerView;
     private int itemPosition;
 
-    private FireBase fireBase;
 
 
 
@@ -43,9 +41,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
         this.foodName=foodName;
         this.price = price;
         this.path = path;
-        myhandler = new Myhandler();
-        fireBase = new FireBase();
-        startUpdateTimer();
+
 
 
     }
@@ -96,35 +92,6 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
         notifyItemInserted(position);
     }
 
-    //---------------自動notifydatachange 更新------------------
-    private void startUpdateTimer() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                myhandler.sendEmptyMessage(0);
-            }
-        }, 0, 3000);
-    }
-    public class Myhandler extends Handler{
-
-        @Override
-        public void handleMessage(Message msg) {
-            notifyDataSetChanged();
-//            notifyItemRangeChanged(0 , foodName.size());
-//            notifyItemChanged(0);
-//            if(fireBase.isChange) {
-//                notifyItemRangeChanged(0, path.size());
-//                notifyItemRangeChanged(0, price.size());
-//                notifyItemRangeChanged(0, foodName.size());
-//            }
-//            Log.v("ppking", "change");
-        }
-    }
-
-    //--------------------------------------------------------
-
     public class MyOnClickListener2 implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -139,7 +106,6 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
                 F2.isDelete = false;
                 type = "soup";
                 typeDelPosition = itemPosition;
-                Toast.makeText(context,foodItem,Toast.LENGTH_LONG).show();
             }
 
         }

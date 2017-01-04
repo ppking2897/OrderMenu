@@ -39,7 +39,7 @@
                         android:layout_marginRight="20sp"
                         android:background="?attr/selectableItemBackground"
                         android:padding="15dp"
-                        android:text="刪除"
+                        android:text="刪除菜單"
                         />
 
                     <TextView
@@ -51,7 +51,7 @@
                         android:layout_marginLeft="20sp"
                         android:background="?attr/selectableItemBackground"
                         android:padding="15dp"
-                        android:text="新增"
+                        android:text="新增菜單"
                         />
 
                 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.user.android_pager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,7 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class F2 extends Fragment implements View.OnClickListener {
+public class F2 extends Fragment  {
 
     private RecyclerView recyclerViewNoodle;
     private RecyclerView recyclerViewRice;
@@ -32,12 +33,14 @@ public class F2 extends Fragment implements View.OnClickListener {
     private Adapter2 adapter2;
     private FireBase fireBase;
     public static boolean isDelete;
-
+    private Myhandler myhandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fireBase = new FireBase();
+        myhandler = new Myhandler();
+        startUpdateTimer();
 
     }
 
@@ -58,7 +61,6 @@ public class F2 extends Fragment implements View.OnClickListener {
 //    }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,14 +74,14 @@ public class F2 extends Fragment implements View.OnClickListener {
 //        recyclerViewTitle.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerViewNoodle = (RecyclerView) view.findViewById(R.id.recyclerView_Noodle);
-        recyclerViewNoodle.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerViewNoodle.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
 
         recyclerViewRice = (RecyclerView) view.findViewById(R.id.recyclerView_Rice);
-        recyclerViewRice.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerViewRice.setLayoutManager(new GridLayoutManager(getContext(), 3));
 //
         recyclerViewSoup = (RecyclerView) view.findViewById(R.id.recyclerView_Soup);
-        recyclerViewSoup.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerViewSoup.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
         //----------------------------------------------
         //------將資料丟入調變器內去分配-------
@@ -87,28 +89,29 @@ public class F2 extends Fragment implements View.OnClickListener {
         //fireBase.ReadBase("menu");
         fireBase.ReadFoodBase("foodinfo");
 
-        adapter = new Adapter(getContext(),fireBase.pathNoodle , fireBase.foodNoodle , fireBase.priceNoodle);
+        adapter = new Adapter(getContext(), fireBase.pathNoodle, fireBase.foodNoodle, fireBase.priceNoodle);
         recyclerViewNoodle.setAdapter(adapter);
 
-        adapter1 = new Adapter1(getContext(),fireBase.pathRice , fireBase.foodRice , fireBase.priceRice);
+        adapter1 = new Adapter1(getContext(), fireBase.pathRice, fireBase.foodRice, fireBase.priceRice);
         recyclerViewRice.setAdapter(adapter1);
 //
-        adapter2 = new Adapter2(getContext(),fireBase.pathSoup , fireBase.foodSoup , fireBase.priceSoup);
+        adapter2 = new Adapter2(getContext(), fireBase.pathSoup, fireBase.foodSoup, fireBase.priceSoup);
         recyclerViewSoup.setAdapter(adapter2);
         //----------------------------------------
         //---------右上角ADD功能
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                ShowDialog showDialog =new ShowDialog();
+            @Override
+            public void onClick(View v) {
+                ShowDialog showDialog = new ShowDialog();
                 showDialog.showAddDialog(getContext());
 
             }
         });
-        view.findViewById(R.id.del).setOnClickListener(new View.OnClickListener(){
+        view.findViewById(R.id.del).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"請選擇要刪除的項目",Toast.LENGTH_SHORT).show();
-                isDelete =true;
+                Toast.makeText(getContext(), "請選擇要刪除的項目", Toast.LENGTH_SHORT).show();
+                isDelete = true;
                 //Log.v("ppking" , "F2_isdelete : " + isDelete);
             }
         });
@@ -116,19 +119,24 @@ public class F2 extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        Log.v("ppking" , "onclick");
+    private void startUpdateTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                myhandler.sendEmptyMessage(0);
+            }
+        }, 0, 1000);
     }
 
-    public class test implements View.OnClickListener{
+    public class Myhandler extends Handler {
+
         @Override
-        public void onClick(View view) {
-            Log.v("ppking" , "F2"+view);
+        public void handleMessage(Message msg) {
+            adapter.notifyDataSetChanged();
+            adapter1.notifyDataSetChanged();
+            adapter2.notifyDataSetChanged();
         }
     }
-
-
-
-
 }

@@ -1,7 +1,6 @@
 package com.example.user.android_pager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +14,15 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.user.android_pager.Adapter.type;
+import static com.example.user.android_pager.Adapter.typeDelPosition;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
+
+public class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
     private Context context;
     private List<App> apps  ;
     private View view, view2;
@@ -30,17 +30,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private List<String> foodName;
     private List<String> price;
     private List<String> path;
-    private final View.OnClickListener onClickListener  = new MyOnClickListener();
+    private final View.OnClickListener onClickListener1  = new MyOnClickListener1();
     private RecyclerView recyclerView;
     private int itemPosition;
 
     private FireBase fireBase;
-    static String type;
-    static int typeDelPosition;
 
 
 
-    public Adapter(Context context ,List<String> path , List<String> foodName ,List<String> price )  {
+    public Adapter1(Context context , List<String> path , List<String> foodName , List<String> price )  {
         this.context = context;
         this.foodName=foodName;
         this.price = price;
@@ -58,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
         //recyclerview內的layout指定
         view = LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false);
-        view.setOnClickListener(onClickListener);
+        view.setOnClickListener(onClickListener1);
         MyViewHolder holder = new MyViewHolder(view);
         return holder;
     }
@@ -109,7 +107,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
             }
         }, 0, 3000);
     }
-    public class Myhandler extends android.os.Handler{
+    public class Myhandler extends Handler{
 
         @Override
         public void handleMessage(Message msg) {
@@ -127,7 +125,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     //--------------------------------------------------------
 
-    public class MyOnClickListener implements View.OnClickListener {
+    public class MyOnClickListener1 implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (F2.isDelete) {
@@ -139,7 +137,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
                 ShowDialog showDialog = new ShowDialog();
                 showDialog.showDelItem(context, foodItem, pathItem, priceItem);
                 F2.isDelete = false;
-                type = "noodle";
+                type = "rice";
                 typeDelPosition = itemPosition;
                 Toast.makeText(context,foodItem,Toast.LENGTH_LONG).show();
             }

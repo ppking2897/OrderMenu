@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +17,28 @@ import android.widget.Toast;
 
 import com.yalantis.phoenix.PullToRefreshView;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
-public class F2 extends Fragment {
-    private PullToRefreshView mPullToRefreshView;
-    private RecyclerView recyclerView;
+public class F2 extends Fragment implements View.OnClickListener {
+
+    private RecyclerView recyclerViewNoodle;
+    private RecyclerView recyclerViewRice;
+    private RecyclerView recyclerViewSoup;
+
     private Adapter adapter;
+    private Adapter1 adapter1;
+    private Adapter2 adapter2;
     private FireBase fireBase;
     public static boolean isDelete;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fireBase = new FireBase();
+
     }
 
 
@@ -54,37 +66,35 @@ public class F2 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f2, container, false);
 
-        //下拉式更新
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, 1000);
-            }
-        });
-
-
 
         //----------------RecyclerView------------------
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+//        recyclerViewTitle = (RecyclerView) view.findViewById(R.id.recyclerView_Title);
+//        recyclerViewTitle.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        recyclerViewNoodle = (RecyclerView) view.findViewById(R.id.recyclerView_Noodle);
+        recyclerViewNoodle.setLayoutManager(new GridLayoutManager(getContext(),3));
+
+
+        recyclerViewRice = (RecyclerView) view.findViewById(R.id.recyclerView_Rice);
+        recyclerViewRice.setLayoutManager(new GridLayoutManager(getContext(),3));
+//
+        recyclerViewSoup = (RecyclerView) view.findViewById(R.id.recyclerView_Soup);
+        recyclerViewSoup.setLayoutManager(new GridLayoutManager(getContext(),3));
+
         //----------------------------------------------
         //------將資料丟入調變器內去分配-------
 
         //fireBase.ReadBase("menu");
-        fireBase.ReadFoodBase("menuinfo");
+        fireBase.ReadFoodBase("foodinfo");
 
-        //List<App> apps = getApps();
-        adapter = new Adapter(getContext(),fireBase.path , fireBase.food , fireBase.price);
+        adapter = new Adapter(getContext(),fireBase.pathNoodle , fireBase.foodNoodle , fireBase.priceNoodle);
+        recyclerViewNoodle.setAdapter(adapter);
 
-
-        recyclerView.setAdapter(adapter);
+        adapter1 = new Adapter1(getContext(),fireBase.pathRice , fireBase.foodRice , fireBase.priceRice);
+        recyclerViewRice.setAdapter(adapter1);
+//
+        adapter2 = new Adapter2(getContext(),fireBase.pathSoup , fireBase.foodSoup , fireBase.priceSoup);
+        recyclerViewSoup.setAdapter(adapter2);
         //----------------------------------------
         //---------右上角ADD功能
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
@@ -105,5 +115,20 @@ public class F2 extends Fragment {
         //------------------END-------------------------
         return view;
     }
+
+    @Override
+    public void onClick(View view) {
+        Log.v("ppking" , "onclick");
+    }
+
+    public class test implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Log.v("ppking" , "F2"+view);
+        }
+    }
+
+
+
 
 }

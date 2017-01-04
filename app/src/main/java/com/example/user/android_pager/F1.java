@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class F1 extends Fragment {
-    private int DATA_COUNT = 12;
+    private int DATA_COUNT = 6;
     private PullToRefreshView mPullToRefreshView;
 
     @Override
@@ -99,7 +99,7 @@ public class F1 extends Fragment {
     // 以下範產生出(0,0), (1,2), (2,4), (3,6), (4,8)五個點
 
     private List<BarEntry> getChartData(){
-        final int DATA_COUNT = 3;
+        final int DATA_COUNT = 7;
 
         List<BarEntry> chartData = new ArrayList<>();
         //每一個月都有四筆資料
@@ -111,12 +111,13 @@ public class F1 extends Fragment {
             float revenue_Other = i*1; //最下層
             chartData.add(new BarEntry(new float[]{revenue_Other, revenue_KR, revenue_JP, revenue_US}, i-1));
         }
+
         return chartData;
     }
 
     private List<String> getLabels(){
         List<String> chartLabels = new ArrayList<>();
-        for(int i=0;i<=DATA_COUNT;i++){
+        for(int i=0;i<DATA_COUNT;i++){
             chartLabels.add((i+1)+"月");
         }
         return chartLabels;

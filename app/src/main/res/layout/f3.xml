@@ -8,19 +8,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
         <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="桌號1"
-                android:gravity="center"
-                />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="桌號1"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="已出餐"
+                    android:id="@+id/seat01"
+                    android:onClick="seat01"
+                    />
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,12 +49,15 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="品項 : "
+                    android:textSize="22sp"
+                    android:text="品項"
                     />
                 <TextView
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_marginRight="15sp"
                     android:text="數量"
                     />
             </RelativeLayout>
@@ -49,11 +67,7 @@
                 android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="button"
-                />
+
         </LinearLayout>
 
         <LinearLayout
@@ -61,12 +75,27 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="桌號2"
-                android:gravity="center"
-                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="桌號2"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="已出餐"
+                    android:id="@+id/seat02"
+                    android:onClick="seat02"
+                    />
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,12 +109,15 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="品項 : "
+                    android:textSize="22sp"
+                    android:text="品項"
                     />
                 <TextView
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_marginRight="15sp"
                     android:text="數量"
                     />
             </RelativeLayout>
@@ -96,11 +128,7 @@
                 android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="button"
-                />
+
         </LinearLayout>
 
         <LinearLayout
@@ -108,13 +136,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="桌號3"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="已出餐"
+                    android:id="@+id/seat03"
+                    android:onClick="seat03"
+                    />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="桌號3"
-                android:gravity="center"
-                />
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,12 +171,15 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="品項 : "
+                    android:textSize="22sp"
+                    android:text="品項"
                     />
                 <TextView
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_marginRight="15sp"
                     android:text="數量"
                     />
             </RelativeLayout>
@@ -144,11 +190,7 @@
                 android:layout_height="wrap_content">
 
             </android.support.v7.widget.RecyclerView>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="button"
-                />
+
         </LinearLayout>
     </LinearLayout>
 

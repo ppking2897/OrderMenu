@@ -31,6 +31,7 @@ public class F2 extends Fragment  {
     private Adapter adapter;
     private Adapter1 adapter1;
     private Adapter2 adapter2;
+    private Order_Info_Adapter01 order_info_adapter01;
     private FireBase fireBase;
     public static boolean isDelete;
     private Myhandler myhandler;
@@ -40,6 +41,7 @@ public class F2 extends Fragment  {
         super.onCreate(savedInstanceState);
         fireBase = new FireBase();
         myhandler = new Myhandler();
+
         startUpdateTimer();
 
     }

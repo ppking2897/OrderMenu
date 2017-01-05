@@ -25,6 +25,7 @@ public class FireBase {
     private FirebaseDatabase databaseTest = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseWrite = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseDelete = FirebaseDatabase.getInstance();
+    private FirebaseDatabase databaseOrder = FirebaseDatabase.getInstance();
 
 //    DatabaseReference myRefFood;
 //    DatabaseReference myRefPrice;
@@ -32,6 +33,7 @@ public class FireBase {
     private DatabaseReference myRefTest;
     private DatabaseReference myRefWrite;
     private DatabaseReference myRefDelete;
+    private DatabaseReference myRefOrder;
 
     List<String> foodNoodle =new ArrayList<>();
     List<String> foodRice =new ArrayList<>();
@@ -46,6 +48,18 @@ public class FireBase {
     List<String> pathNoodle = new ArrayList<>();
     List<String> pathRice = new ArrayList<>();
     List<String> pathSoup = new ArrayList<>();
+
+    List<String> orderName01 = new ArrayList<>();
+    List<String> orderNumber01 = new ArrayList<>();
+    String orderPrice01;
+
+    List<String> orderName02 = new ArrayList<>();
+    List<String> orderNumber02 = new ArrayList<>();
+    String orderPrice02;
+
+    List<String> orderName03 = new ArrayList<>();
+    List<String> orderNumber03 = new ArrayList<>();
+    String orderPrice03;
 
     static List<String> key ;
     static List<String> keyNoodle ;
@@ -287,4 +301,90 @@ public class FireBase {
         }
         //myRefDelete.child(key.get(itemPosition)).removeValue();
     }
+
+    public void ReadOrderInfo01(final String name , final String seat) {
+        myRefOrder = databaseOrder.getReference(name);
+        myRefOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                orderName01.clear();
+                orderNumber01.clear();
+                orderPrice01 = "" ;
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("name").getChildrenCount() ; i++){
+                    orderName01.add(dataSnapshot.child(seat).child("name").child("name"+i).getValue().toString());
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("number").getChildrenCount() ; i++){
+                    orderNumber01.add(dataSnapshot.child(seat).child("number").child("number"+i).getValue().toString());
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("price").getChildrenCount() ; i++){
+                    orderPrice01=dataSnapshot.child(seat).child("price").child("price"+i).getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ReadOrderInfo02(final String name , final String seat) {
+        myRefOrder = databaseOrder.getReference(name);
+        myRefOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                orderName02.clear();
+                orderNumber02.clear();
+                orderPrice02 = "" ;
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("name").getChildrenCount() ; i++){
+                    orderName02.add(dataSnapshot.child(seat).child("name").child("name"+i).getValue().toString());
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("number").getChildrenCount() ; i++){
+                    orderNumber02.add(dataSnapshot.child(seat).child("number").child("number"+i).getValue().toString());
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("price").getChildrenCount() ; i++){
+                    orderPrice02=dataSnapshot.child(seat).child("price").child("price"+i).getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void ReadOrderInfo03(final String name , final String seat) {
+        myRefOrder = databaseOrder.getReference(name);
+        myRefOrder.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                orderName03.clear();
+                orderNumber03.clear();
+                orderPrice03 = "" ;
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("name").getChildrenCount() ; i++){
+                    orderName03.add(dataSnapshot.child(seat).child("name").child("name"+i).getValue().toString());
+                    Log.v("ppking" , ""+orderName03);
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("number").getChildrenCount() ; i++){
+                    orderNumber03.add(dataSnapshot.child(seat).child("number").child("number"+i).getValue().toString());
+                }
+
+                for (int i = 0 ; i<dataSnapshot.child(seat).child("price").getChildrenCount() ; i++){
+                    orderPrice03=dataSnapshot.child(seat).child("price").child("price"+i).getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

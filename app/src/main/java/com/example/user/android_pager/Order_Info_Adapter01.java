@@ -20,11 +20,11 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
     private List<String> number;
 
 
+
     public Order_Info_Adapter01(Context context , List<String> foodname , List<String> number) {
         this.context = context;
         this.foodname = foodname;
         this.number = number;
-        Log.v("ppking","foodname" + foodname);
     }
 
     @Override
@@ -37,7 +37,6 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Log.v("ppking","onBindViewHolder" + foodname);
         holder.foodText.setText(foodname.get(position));
         holder.numberText.setText(number.get(position));
 
@@ -55,10 +54,6 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
             super(itemView);
             foodText = (TextView) itemView.findViewById(R.id.orderItem);
             numberText = (TextView) itemView.findViewById(R.id.orderPrice);
-
-
-
-
         }
     }
 }

@@ -33,6 +33,8 @@ public class F3 extends Fragment {
     private RecyclerView recyclerViewNumber2;
     private RecyclerView recyclerViewNumber3;
 
+    private Order_Info_Adapter01 order_info_adapter01;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,28 @@ public class F3 extends Fragment {
 
         recyclerViewNumber1 = (RecyclerView) view.findViewById(R.id.recyclerView_Number1);
         recyclerViewNumber1.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        List<String> list = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
+        list.add("SSSS");
+        list.add("SSSS");
+        list.add("SSSS");
+        list.add("SSSS");
+        list.add("SSSS");
+        list.add("SSSS");
+        list.add("SSSS");
+
+        list1.add("XXXX");
+        list1.add("XXXX");
+        list1.add("XXXX");
+        list1.add("XXXX");
+        list1.add("XXXX");
+        list1.add("XXXX");
+        list1.add("XXXX");
+
+        order_info_adapter01 = new Order_Info_Adapter01(getContext(),list,list1);
+
+        recyclerViewNumber1.setAdapter(order_info_adapter01);
 
 
         recyclerViewNumber2 = (RecyclerView) view.findViewById(R.id.recyclerView_Number2);

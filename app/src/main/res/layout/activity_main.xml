@@ -35,7 +35,7 @@
         app:stl_defaultTabTextAllCaps="true"
         app:stl_defaultTabTextColor="#FC000000"
         app:stl_defaultTabTextSize="12sp"
-        app:stl_defaultTabTextHorizontalPadding="43sp"
+        app:stl_defaultTabTextHorizontalPadding="40dp"
         app:stl_defaultTabTextMinWidth="0dp"
         app:stl_distributeEvenly="false"
         app:stl_clickable="true"

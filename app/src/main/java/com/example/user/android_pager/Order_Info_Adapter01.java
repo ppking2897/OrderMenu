@@ -2,6 +2,7 @@ package com.example.user.android_pager;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,13 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
     private Context context;
     private List<String> foodname;
     private List<String> number;
+
+
     public Order_Info_Adapter01(Context context , List<String> foodname , List<String> number) {
         this.context = context;
         this.foodname = foodname;
         this.number = number;
+        Log.v("ppking","foodname" + foodname);
     }
 
     @Override
@@ -33,12 +37,15 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        Log.v("ppking","onBindViewHolder" + foodname);
+        holder.foodText.setText(foodname.get(position));
+        holder.numberText.setText(number.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return foodname.size();
     }
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView foodText;
@@ -46,6 +53,10 @@ public class Order_Info_Adapter01 extends RecyclerView.Adapter<Order_Info_Adapte
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            foodText = (TextView) itemView.findViewById(R.id.orderItem);
+            numberText = (TextView) itemView.findViewById(R.id.orderPrice);
+
+
 
 
         }

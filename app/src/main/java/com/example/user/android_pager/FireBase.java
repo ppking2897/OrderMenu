@@ -160,7 +160,7 @@ public class FireBase {
         });
     }
 
-    public void WriteFoodBase(String name , String path , String price , final String selectItem) {
+    public void WriteFoodBase(String name , String price , String path , final String selectItem) {
         this.DBName = name;
         this.DBPath = path;
         this.DBPrice = price;
@@ -190,8 +190,8 @@ public class FireBase {
 
                         //count = dataSnapshot.getChildrenCount();
                         child02.put("name", DBName);
-                        child02.put("path", DBPath);
                         child02.put("price", DBPrice);
+                        child02.put("path", DBPath);
                         child01.put(""+(intkey+1) , child02);
 //                        Log.v("ppking" ,"key.size"+key.get(key.size()-1 ));
                         //myRefWrite.updateChildren(child01);
@@ -305,7 +305,7 @@ public class FireBase {
 
     public void DeleteOrderInfo(String seatNumber){
         myRefDelete = databaseDelete.getReference("numberseat");
-        myRefDelete.child(seatNumber).removeValue();
+        myRefDelete.child("seatNumber").removeValue();
     }
 
 }

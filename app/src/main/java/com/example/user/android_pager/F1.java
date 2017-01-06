@@ -41,19 +41,7 @@ public class F1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.f1,container,false);
 
-        //下拉式更新
-        mPullToRefreshView = (PullToRefreshView)view.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                },1000);
-            }
-        });
+
         // 長方曲線圖表示
         BarChart chart_bar = (BarChart)view.findViewById(R.id.chart_bar);
         chart_bar.setData(getBarData());

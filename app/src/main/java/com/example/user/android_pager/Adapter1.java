@@ -59,9 +59,13 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //resize 重新改變圖片大小
         if(!foodName.isEmpty()&&!price.isEmpty()&&!path.isEmpty()) {
-            Picasso.with(context).load(path.get(position)).resize(300, 300).into(holder.img);
-            holder.textView.setText("名稱 : " + foodName.get(position));
-            holder.textPrice.setText("價格 : " + price.get(position) + "元");
+            holder.img.setImageResource(R.drawable.b3);
+
+            if(!path.get(position).isEmpty()) {
+                Picasso.with(context).load(path.get(position)).resize(300, 300).into(holder.img);
+            }
+            holder.textView.setText("名稱:" + foodName.get(position));
+            holder.textPrice.setText("價格:" + price.get(position) + "元");
 
         }
 

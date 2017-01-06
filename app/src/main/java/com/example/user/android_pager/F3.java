@@ -70,10 +70,11 @@ public class F3 extends Fragment {
         seat01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("ppking" , "seat 01 : ");
                 fireBase.orderName01.clear();
                 fireBase.orderNumber01.clear();
                 fireBase.orderPrice01 = "";
+
+                fireBase.DeleteOrderInfo("01");
             }
         });
 
@@ -81,10 +82,11 @@ public class F3 extends Fragment {
         seat02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("ppking" , "seat 02 : ");
                 fireBase.orderName02.clear();
                 fireBase.orderNumber02.clear();
                 fireBase.orderPrice02 = "";
+
+                fireBase.DeleteOrderInfo("02");
             }
         });
 
@@ -92,19 +94,14 @@ public class F3 extends Fragment {
         seat03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("ppking" , "seat 03 : ");
+
                 fireBase.orderName03.clear();
                 fireBase.orderNumber03.clear();
                 fireBase.orderPrice03 = "";
+
+                fireBase.DeleteOrderInfo("03");
             }
         });
-
-
-        List<String> list = new ArrayList<>();
-        List<String> list1 = new ArrayList<>();
-        list.add("SSSS");
-
-        list1.add("XXXX");
 
 
         fireBase.ReadOrderInfo01("numberseat" , "01");

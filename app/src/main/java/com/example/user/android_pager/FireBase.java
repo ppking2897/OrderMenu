@@ -82,89 +82,6 @@ public class FireBase {
     private int intkey;
 
 
-//    public void ReadBase(final String name){
-//        myRefFood = databaseFood.getReference(name);
-//        food.clear();
-//        myRefFood.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int i = 0;
-//                //判斷是不是有多出新的一筆資料，如果有全部清掉再丟資料進去
-//                if (dataSnapshot.getChildrenCount()!=food.size()){
-//                    food.clear();
-//                }
-//                //for each 到list food 裡面呈現字體
-//                for(DataSnapshot nameFood :dataSnapshot.getChildren()){
-////                    Log.v("ppking", "dataSnapshot" + dataSnapshot.getChildrenCount());
-//
-//                    food.add(i,nameFood.getValue(String.class));
-//                    i++;
-//                }
-//                //從firebase 讀取完名稱之後  再讀取價格
-//                ReadBasePrice("price");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.w("ppking", "Failed to read value.", databaseError.toException());
-//            }
-//        });
-//    }
-//
-//    public void ReadBasePrice(final String name){
-//        myRefPrice = databasePrice.getReference(name);
-//        price.clear();
-//        myRefPrice.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int i = 0;
-//                //判斷是不是有多出新的一筆資料，如果有全部清掉再丟資料進去
-//                if (dataSnapshot.getChildrenCount()!=price.size()){
-//                    price.clear();
-//                }
-//                for(DataSnapshot namePrice :dataSnapshot.getChildren()){
-////                    Log.v("ppking", "dataSnapshot" + dataSnapshot.getChildrenCount());
-//
-//                    price.add(i,namePrice.getValue(String.class));
-////                    Log.v("ppking" , "price : " + price );
-//                    i++;
-//                }
-//                ReadPicturePath("picturepath");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.w("ppking", "Failed to read Price.", databaseError.toException());
-//            }
-//        });
-//
-//    }
-//
-//    public void ReadPicturePath(final String name){
-//        myRefPath = databasePath.getReference(name);
-//        path.clear();
-//        myRefPath.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                int i = 0;
-//                //判斷是不是有多出新的一筆資料，如果有全部清掉再丟資料進去
-//                if (dataSnapshot.getChildrenCount()!=path.size()){
-//                    path.clear();
-//                }
-//                for(DataSnapshot namePrice :dataSnapshot.getChildren()){
-//                    path.add(i,namePrice.getValue(String.class));
-////                    Log.v("ppking" , "FireBase path" + path);
-//                    i++;
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.w("ppking", "Failed to read Path.", databaseError.toException());
-//            }
-//        });
-//    }
-
     public void ReadFoodBase(final String name){
         myRefTest =databaseTest.getReference(name);
         myRefTest.addValueEventListener(new ValueEventListener() {
@@ -368,7 +285,6 @@ public class FireBase {
                 orderPrice03 = "" ;
                 for (int i = 0 ; i<dataSnapshot.child(seat).child("name").getChildrenCount() ; i++){
                     orderName03.add(dataSnapshot.child(seat).child("name").child("name"+i).getValue().toString());
-                    Log.v("ppking" , ""+orderName03);
                 }
 
                 for (int i = 0 ; i<dataSnapshot.child(seat).child("number").getChildrenCount() ; i++){
@@ -385,6 +301,11 @@ public class FireBase {
 
             }
         });
+    }
+
+    public void DeleteOrderInfo(String seatNumber){
+        myRefDelete = databaseDelete.getReference("numberseat");
+        myRefDelete.child(seatNumber).removeValue();
     }
 
 }

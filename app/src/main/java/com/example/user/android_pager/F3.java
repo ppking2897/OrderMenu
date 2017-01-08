@@ -104,6 +104,13 @@ public class F3 extends Fragment {
         });
 
 
+        List<String> list = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
+        list.add("Server Busy");
+
+        list1.add("XXXX");
+
+
         fireBase.ReadOrderInfo01("numberseat" , "01");
         fireBase.ReadOrderInfo02("numberseat" , "02");
         fireBase.ReadOrderInfo03("numberseat" , "03");
@@ -154,7 +161,7 @@ public class F3 extends Fragment {
 
                 myhandlerF3.sendEmptyMessage(0);
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
     public class MyhandlerF3 extends Handler {

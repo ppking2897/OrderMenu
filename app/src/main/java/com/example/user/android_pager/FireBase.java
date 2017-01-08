@@ -151,6 +151,7 @@ public class FireBase {
 //                    Log.v("ppking", "souppath : " + pathSoup);
 //                    Log.v("ppking", "soupprice : " + priceSoup);
                 }
+
             }
 
             @Override
@@ -197,6 +198,8 @@ public class FireBase {
                         //myRefWrite.updateChildren(child01);
                         isupdate = true;
                         myRefWrite.child(selectItem).updateChildren(child01);
+
+
 
                     }
                 }
@@ -305,7 +308,7 @@ public class FireBase {
 
     public void DeleteOrderInfo(String seatNumber){
         myRefDelete = databaseDelete.getReference("numberseat");
-        myRefDelete.child("seatNumber").removeValue();
+        myRefDelete.child(seatNumber).removeValue();
     }
 
 }

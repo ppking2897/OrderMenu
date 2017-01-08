@@ -60,7 +60,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //resize 重新改變圖片大小
-        if(!foodName.isEmpty()&&!price.isEmpty()&&!path.isEmpty()) {
+        //if(!foodName.isEmpty()&&!price.isEmpty()&&!path.isEmpty()) {
             holder.img.setImageResource(R.drawable.b6);
 
             if(!path.get(position).isEmpty()) {
@@ -69,7 +69,7 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.MyViewHolder>{
             holder.textView.setText("名稱:" + foodName.get(position));
             holder.textPrice.setText("價格:" + price.get(position) + "元");
 
-        }
+        //}
 
     }
 

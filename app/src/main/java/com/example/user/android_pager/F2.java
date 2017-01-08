@@ -39,9 +39,10 @@ public class F2 extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fireBase = new FireBase();
-        myhandler = new Myhandler();
 
+        myhandler = new Myhandler();
+        fireBase = new FireBase();
+        fireBase.ReadFoodBase("foodinfo");
         startUpdateTimer();
 
     }
@@ -89,7 +90,7 @@ public class F2 extends Fragment  {
         //------將資料丟入調變器內去分配-------
 
         //fireBase.ReadBase("menu");
-        fireBase.ReadFoodBase("foodinfo");
+
 
         adapter = new Adapter(getContext(), fireBase.pathNoodle, fireBase.foodNoodle, fireBase.priceNoodle);
         recyclerViewNoodle.setAdapter(adapter);
@@ -129,7 +130,7 @@ public class F2 extends Fragment  {
 
                 myhandler.sendEmptyMessage(0);
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
     public class Myhandler extends Handler {

@@ -20,6 +20,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    FireBase fireBase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(viewPager);
-
+        fireBase = new FireBase();
+        fireBase.ReadFoodBase("foodinfo");
     }
 }

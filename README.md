@@ -22,4 +22,6 @@ Fragment內使用RecyclerView去呈現，並設定Adapter，將從Firebase上讀
 #影片
 此為在資策會中展示的影片 https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be
 
+
+
 #Thank you for your watching!

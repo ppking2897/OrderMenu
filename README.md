@@ -4,7 +4,7 @@
 Firebase的格式是JSON格式，上傳或更新資料都要使用MAP的儲存方式，點餐明細、菜色圖片、菜色價格、菜色名稱都是存放於Firebase內，菜色的圖片是儲存圖片的路徑，存放在google雲端內。
 每次App都會先去讀取資料庫，先設定要查詢的類別名稱，再利用onDataChange去將資料一筆一筆撈取下來，再用Foreach的方式去儲存為ArrayList格式，再丟入Adapter內。
 若是有新的資料或者修改資料，onDataChange會自動觸發，再去撈取資料。
-#QRCode Zxing 
+# QRCode Zxing 
 使用QRCode的掃描功能，必須先開啟相機權限，再來開啟相機Camera.open()，並在onActivityResult中讀取掃到的QRCode的資料，會先在App中先判斷正確無誤後，再做點餐的動作，這部分是在使用者App當中使用。
 
 # FB API

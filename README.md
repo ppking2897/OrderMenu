@@ -25,4 +25,10 @@ Fragment內使用RecyclerView去呈現，並設定Adapter，將從Firebase上讀
 [影片連結](https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be)
 
 
+
+
+
+
+
+
 ***Thank you for your watching***

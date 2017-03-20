@@ -16,12 +16,12 @@ Fragment內使用RecyclerView去呈現，並設定Adapter，將從Firebase上讀
 
 # 使用者與管理者
 此處為管理者的App部分，需與使用者搭配。
-[使用者APP]https://github.com/leo0908w/blackmenu-master
+[使用者APP]:https://github.com/leo0908w/blackmenu-master
 
 # 影片
 此為在資策會中展示的影片，主要是以情劇的方式呈現，目的是為了顯示出管理者跟使用者之間的聯繫以及管理者APP的功能 
 
-[Youtube]https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be
+[Youtube]:https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be
 
 
 

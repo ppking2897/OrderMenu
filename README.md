@@ -15,14 +15,12 @@ Fragment內使用RecyclerView去呈現，並設定Adapter，將從Firebase上讀
 使用TimerTask不斷的去執行notifyDataSetChanged，持續性的更新畫面。若有新的資料更新，則會自動觸發Firebase內的onDataChange，再去撈取資料後，更新畫面。
 
 # 使用者與管理者
-此處為管理者的App部分，需與使用者搭配。
-[使用者APP]:https://github.com/leo0908w/blackmenu-master
-
+此處為管理者的App部分，需與使用者搭配，使用者是由另一位所製作。
+[使用者APP](https://github.com/leo0908w/blackmenu-master)
 # 影片
-此為在資策會中展示的影片，主要是以情劇的方式呈現，目的是為了顯示出管理者跟使用者之間的聯繫以及管理者APP的功能 
-
-[Youtube]:https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be
-
+此為在資策會中展示的影片，主要是以情劇的方式呈現，目的是為了顯示出管理者跟使用者之間的聯繫
+以及管理者APP的功能。
+[影片連結](https://www.youtube.com/watch?v=dfVhyTedzsA&feature=youtu.be)
 
 
 # Thank you for your watching!

@@ -19,17 +19,12 @@ import java.util.Map;
 import java.util.Objects;
 
 public class FireBase {
-//    FirebaseDatabase databaseFood = FirebaseDatabase.getInstance();
-//    FirebaseDatabase databasePrice = FirebaseDatabase.getInstance();
-//    FirebaseDatabase databasePath = FirebaseDatabase.getInstance();
+
     private FirebaseDatabase databaseTest = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseWrite = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseDelete = FirebaseDatabase.getInstance();
     private FirebaseDatabase databaseOrder = FirebaseDatabase.getInstance();
 
-//    DatabaseReference myRefFood;
-//    DatabaseReference myRefPrice;
-//    DatabaseReference myRefPath;
     private DatabaseReference myRefTest;
     private DatabaseReference myRefWrite;
     private DatabaseReference myRefDelete;
@@ -194,8 +189,6 @@ public class FireBase {
                         child02.put("price", DBPrice);
                         child02.put("path", DBPath);
                         child01.put(""+(intkey+1) , child02);
-//                        Log.v("ppking" ,"key.size"+key.get(key.size()-1 ));
-                        //myRefWrite.updateChildren(child01);
                         isupdate = true;
                         myRefWrite.child(selectItem).updateChildren(child01);
 
@@ -219,7 +212,6 @@ public class FireBase {
         }else if(type == "soup"){
             myRefDelete.child(keySoup.get(itemPosition)).removeValue();
         }
-        //myRefDelete.child(key.get(itemPosition)).removeValue();
     }
 
     public void ReadOrderInfo01(final String name , final String seat) {

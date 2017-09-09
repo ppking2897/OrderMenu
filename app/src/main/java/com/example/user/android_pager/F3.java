@@ -64,6 +64,7 @@ public class F3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
+        
         view = inflater.inflate(R.layout.f3,container,false);
 
         seat01 = (Button)view.findViewById(R.id.seat01);

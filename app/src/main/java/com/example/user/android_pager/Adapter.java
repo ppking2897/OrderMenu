@@ -1,37 +1,22 @@
 package com.example.user.android_pager;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
+class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
     private Context context;
 
-    private View view;
     private List<String> foodName;
     private List<String> price;
     private List<String> path;
     private final View.OnClickListener onClickListener  = new MyOnClickListener();
-    private RecyclerView recyclerView;
-    private int itemPosition;
 
 
     static String type;
@@ -39,14 +24,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
 
 
-    public Adapter(Context context ,List<String> path , List<String> foodName ,List<String> price )  {
+    Adapter(Context context, List<String> path, List<String> foodName, List<String> price)  {
         this.context = context;
         this.foodName=foodName;
         this.price = price;
         this.path = path;
-
-
-
     }
 
     @Override
@@ -54,10 +36,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 //        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false));
 
         //recyclerview內的layout指定
-        view = LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
         view.setOnClickListener(onClickListener);
-        MyViewHolder holder = new MyViewHolder(view);
-        return holder;
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -87,7 +68,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
         ImageView img;
         TextView textView , textPrice;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             img = (ImageView) itemView.findViewById(R.id.itemImg);
             textView = (TextView) itemView.findViewById(R.id.itemText);
@@ -104,12 +85,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     //--------------------------------------------------------
 
-    public class MyOnClickListener implements View.OnClickListener {
+    private class MyOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (F2.isDelete) {
-                recyclerView = new RecyclerView(context);
-                itemPosition = recyclerView.getChildAdapterPosition(view);
+                RecyclerView recyclerView = new RecyclerView(context);
+                int itemPosition = recyclerView.getChildAdapterPosition(view);
                 String foodItem = foodName.get(itemPosition);
                 String pathItem = path.get(itemPosition);
                 String priceItem = price.get(itemPosition);

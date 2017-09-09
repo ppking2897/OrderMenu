@@ -1,37 +1,24 @@
 package com.example.user.android_pager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.yalantis.phoenix.PullToRefreshView;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class F2 extends Fragment  {
 
-    private RecyclerView recyclerViewNoodle;
-    private RecyclerView recyclerViewRice;
-    private RecyclerView recyclerViewSoup;
-
     private Adapter adapter;
     private Adapter1 adapter1;
     private Adapter2 adapter2;
-    private Order_Info_Adapter01 order_info_adapter01;
     private FireBase fireBase;
     public static boolean isDelete;
     private Myhandler myhandler;
@@ -73,24 +60,18 @@ public class F2 extends Fragment  {
 
 
         //----------------RecyclerView------------------
-//        recyclerViewTitle = (RecyclerView) view.findViewById(R.id.recyclerView_Title);
-//        recyclerViewTitle.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        recyclerViewNoodle = (RecyclerView) view.findViewById(R.id.recyclerView_Noodle);
+        RecyclerView recyclerViewNoodle = (RecyclerView) view.findViewById(R.id.recyclerView_Noodle);
         recyclerViewNoodle.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
 
-        recyclerViewRice = (RecyclerView) view.findViewById(R.id.recyclerView_Rice);
+        RecyclerView recyclerViewRice = (RecyclerView) view.findViewById(R.id.recyclerView_Rice);
         recyclerViewRice.setLayoutManager(new GridLayoutManager(getContext(), 3));
 //
-        recyclerViewSoup = (RecyclerView) view.findViewById(R.id.recyclerView_Soup);
+        RecyclerView recyclerViewSoup = (RecyclerView) view.findViewById(R.id.recyclerView_Soup);
         recyclerViewSoup.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
         //----------------------------------------------
         //------將資料丟入調變器內去分配-------
-
-        //fireBase.ReadBase("menu");
-
 
         adapter = new Adapter(getContext(), fireBase.pathNoodle, fireBase.foodNoodle, fireBase.priceNoodle);
         recyclerViewNoodle.setAdapter(adapter);
@@ -107,7 +88,6 @@ public class F2 extends Fragment  {
             public void onClick(View v) {
                 ShowDialog showDialog = new ShowDialog();
                 showDialog.showAddDialog(getContext());
-
             }
         });
         view.findViewById(R.id.del).setOnClickListener(new View.OnClickListener() {
@@ -115,7 +95,6 @@ public class F2 extends Fragment  {
             public void onClick(View view) {
                 Toast.makeText(getContext(), "請選擇要刪除的項目", Toast.LENGTH_SHORT).show();
                 isDelete = true;
-                //Log.v("ppking" , "F2_isdelete : " + isDelete);
             }
         });
         //------------------END-------------------------
@@ -133,7 +112,7 @@ public class F2 extends Fragment  {
         }, 0, 500);
     }
 
-    public class Myhandler extends Handler {
+    private class Myhandler extends Handler {
 
         @Override
         public void handleMessage(Message msg) {

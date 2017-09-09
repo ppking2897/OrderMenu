@@ -1,43 +1,28 @@
 package com.example.user.android_pager;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import static com.example.user.android_pager.Adapter.type;
 import static com.example.user.android_pager.Adapter.typeDelPosition;
 
 
-public class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
+class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
     private Context context;
-    private View view;
 
     private List<String> foodName;
     private List<String> price;
     private List<String> path;
     private final View.OnClickListener onClickListener1  = new MyOnClickListener1();
-    private RecyclerView recyclerView;
-    private int itemPosition;
 
 
-
-
-
-    public Adapter1(Context context , List<String> path , List<String> foodName , List<String> price )  {
+    Adapter1(Context context, List<String> path, List<String> foodName, List<String> price)  {
         this.context = context;
         this.foodName=foodName;
         this.price = price;
@@ -49,10 +34,9 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
 //        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false));
 
         //recyclerview內的layout指定
-        view = LayoutInflater.from(context).inflate(R.layout.item_contact,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
         view.setOnClickListener(onClickListener1);
-        MyViewHolder holder = new MyViewHolder(view);
-        return holder;
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -95,12 +79,12 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.MyViewHolder>{
     }
 
 
-    public class MyOnClickListener1 implements View.OnClickListener {
+    private class MyOnClickListener1 implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (F2.isDelete) {
-                recyclerView = new RecyclerView(context);
-                itemPosition = recyclerView.getChildAdapterPosition(view);
+                RecyclerView recyclerView = new RecyclerView(context);
+                int itemPosition = recyclerView.getChildAdapterPosition(view);
                 String foodItem = foodName.get(itemPosition);
                 String pathItem = path.get(itemPosition);
                 String priceItem = price.get(itemPosition);
